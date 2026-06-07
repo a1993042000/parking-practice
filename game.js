@@ -213,6 +213,29 @@
               { x: SX-92, y: 224, a: 90*D, len: 62, wid: 26 }, { x: SX-26, y: 224, a: 90*D, len: 62, wid: 26 },
               { x: SX+26, y: 224, a: 90*D, len: 62, wid: 26 }, { x: SX+92, y: 224, a: 90*D, len: 62, wid: 26 } ] });
 
+    // 16. 滿場倒車入庫（對面也停了車）：四周都是車，正前方被擋，要右打滿斜倒進去
+    L.push({ name: "滿場倒庫（對面有車）", diff: 5,
+      desc: "整個停滿，正對面也停了一台車擋住，沒法直直退，要繞角度右打滿倒進中央空位。",
+      start: { x: 180, y: 326, a: 0 },
+      spot:  { x: SX, y: 400, a: 90*D, len: 62, wid: 28 },
+      walls: [ { x: SX-18, y: 438, w: 36, h: 6 } ],          // 輪擋
+      cars: [ { x: SX-33, y: 400, a: 90*D, len: 62, wid: 26 }, { x: SX+33, y: 400, a: 90*D, len: 62, wid: 26 },
+              { x: SX-99, y: 400, a: 90*D, len: 62, wid: 26 }, { x: SX+99, y: 400, a: 90*D, len: 62, wid: 26 },
+              { x: SX-66, y: 252, a: 90*D, len: 62, wid: 26 }, { x: SX, y: 252, a: 90*D, len: 62, wid: 26 },
+              { x: SX+66, y: 252, a: 90*D, len: 62, wid: 26 },
+              { x: SX-132, y: 252, a: 90*D, len: 62, wid: 26 }, { x: SX+132, y: 252, a: 90*D, len: 62, wid: 26 } ] });
+
+    // 17. 車頭朝裡前進入庫：沿車道過去後，車頭朝裡開進去（前進入庫），底是牆
+    L.push({ name: "車頭朝裡入庫", diff: 4,
+      desc: "沿車道開過去後，車頭朝裡「前進」開進中央空位，底部就是牆，停太前會頂到。",
+      start: { x: 180, y: 300, a: 0 },
+      spot:  { x: SX, y: 398, a: 90*D, len: 60, wid: 28 },
+      walls: [ { x: 260, y: 436, w: W-520, h: 12 } ],        // 庫底牆
+      cars: [ { x: SX-33, y: 398, a: 90*D, len: 60, wid: 26 }, { x: SX+33, y: 398, a: 90*D, len: 60, wid: 26 },
+              { x: SX-99, y: 398, a: 90*D, len: 60, wid: 26 }, { x: SX+99, y: 398, a: 90*D, len: 60, wid: 26 },
+              { x: SX-99, y: 224, a: 90*D, len: 62, wid: 26 }, { x: SX-33, y: 224, a: 90*D, len: 62, wid: 26 },
+              { x: SX+33, y: 224, a: 90*D, len: 62, wid: 26 }, { x: SX+99, y: 224, a: 90*D, len: 62, wid: 26 } ] });
+
     for (const lv of L) {
       lv.walls = lv.walls.concat([
         { x: 0, y: 0, w: W, h: border }, { x: 0, y: H-border, w: W, h: border },
