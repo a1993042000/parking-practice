@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>停車練習 · Parking Practice</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<div id="app">
+  <header>
+    <div class="title">🅿️ 停車練習 <span class="sub">上帝視角</span></div>
+    <div class="level-nav">
+      <button id="prevLevel" title="上一關">◀</button>
+      <span id="levelLabel">關卡</span>
+      <button id="nextLevel" title="下一關">▶</button>
+    </div>
+  </header>
+
+  <div id="stage">
+    <canvas id="game"></canvas>
+    <div id="banner" class="hidden"></div>
+  </div>
+
+  <div id="hud">
+    <div class="hud-item">關卡 <b id="hudLevel">1</b></div>
+    <div class="hud-item">難度 <b id="hudDiff">★</b></div>
+    <div class="hud-item">碰撞 <b id="hudBumps">0</b></div>
+    <div class="hud-item">時間 <b id="hudTime">0.0s</b></div>
+  </div>
+
+  <div id="controls">
+    <div class="sliders">
+      <label>車長 <span id="lenVal">4.6</span> m
+        <input type="range" id="carLen" min="3.4" max="6.0" step="0.1" value="4.6" />
+      </label>
+      <label>車寬 <span id="widVal">1.9</span> m
+        <input type="range" id="carWid" min="1.5" max="2.2" step="0.1" value="1.9" />
+      </label>
+      <button id="resetBtn" class="btn">重置 (R)</button>
+    </div>
+
+    <div class="pad">
+      <div class="pad-row">
+        <button class="dpad" data-act="up">▲</button>
+      </div>
+      <div class="pad-row">
+        <button class="dpad" data-act="left">◀</button>
+        <button class="dpad" data-act="down">▼</button>
+        <button class="dpad" data-act="right">▶</button>
+      </div>
+    </div>
+  </div>
+
+  <p id="hint">鍵盤：方向鍵 / WASD 駕駛，空白鍵煞車，R 重置。把車「完整開進」綠色車位並對正即過關。</p>
+  <p id="desc"></p>
+</div>
+<script src="game.js"></script>
+</body>
+</html>

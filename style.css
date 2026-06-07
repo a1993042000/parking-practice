@@ -1,0 +1,98 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #1b1f24;
+  --panel: #262c34;
+  --ink: #e8eef5;
+  --muted: #8b96a3;
+  --accent: #36c98b;
+  --accent2: #4aa3ff;
+  --danger: #ff5d52;
+}
+html, body {
+  height: 100%;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: system-ui, -apple-system, "Segoe UI", "PingFang TC", "Microsoft JhengHei", sans-serif;
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior: none;
+}
+#app {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 10px 12px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.title { font-size: 20px; font-weight: 700; }
+.title .sub { font-size: 12px; color: var(--muted); font-weight: 400; }
+.level-nav { display: flex; align-items: center; gap: 8px; }
+.level-nav button {
+  background: var(--panel); color: var(--ink); border: 1px solid #3a424d;
+  width: 34px; height: 34px; border-radius: 8px; font-size: 16px; cursor: pointer;
+}
+.level-nav button:active { background: #313942; }
+#levelLabel { font-size: 13px; color: var(--muted); min-width: 120px; text-align: center; }
+
+#stage { position: relative; width: 100%; }
+canvas {
+  width: 100%;
+  display: block;
+  background: #2b3138;
+  border: 1px solid #3a424d;
+  border-radius: 10px;
+  touch-action: none;
+}
+#banner {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column; gap: 14px;
+  background: rgba(12,16,20,0.72);
+  border-radius: 10px;
+  font-size: 26px; font-weight: 700; text-align: center;
+}
+#banner.hidden { display: none; }
+#banner button {
+  font-size: 16px; padding: 10px 18px; border-radius: 10px; cursor: pointer;
+  background: var(--accent); color: #08130d; border: none; font-weight: 700;
+}
+
+#hud {
+  display: flex; gap: 8px; flex-wrap: wrap;
+}
+.hud-item {
+  background: var(--panel); border: 1px solid #3a424d; border-radius: 8px;
+  padding: 6px 10px; font-size: 13px; color: var(--muted);
+}
+.hud-item b { color: var(--ink); font-size: 15px; }
+
+#controls {
+  display: flex; gap: 14px; align-items: flex-start; flex-wrap: wrap;
+  justify-content: space-between;
+}
+.sliders { display: flex; flex-direction: column; gap: 10px; flex: 1; min-width: 220px; }
+.sliders label { font-size: 13px; color: var(--muted); display: flex; flex-direction: column; gap: 4px; }
+.sliders label span { color: var(--ink); font-weight: 700; }
+input[type=range] { width: 100%; accent-color: var(--accent2); }
+.btn {
+  background: var(--panel); color: var(--ink); border: 1px solid #3a424d;
+  padding: 9px 12px; border-radius: 8px; cursor: pointer; font-size: 14px; align-self: flex-start;
+}
+.btn:active { background: #313942; }
+
+.pad { display: flex; flex-direction: column; align-items: center; gap: 6px; user-select: none; }
+.pad-row { display: flex; gap: 6px; }
+.dpad {
+  width: 56px; height: 56px; border-radius: 12px; font-size: 22px;
+  background: var(--panel); color: var(--ink); border: 1px solid #3a424d; cursor: pointer;
+}
+.dpad:active, .dpad.on { background: var(--accent2); color: #04121f; }
+
+#hint, #desc { font-size: 12.5px; color: var(--muted); line-height: 1.5; }
+#desc { color: #b9c4d0; }
