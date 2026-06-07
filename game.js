@@ -140,6 +140,49 @@
       cars: [ { x: SX-72, y: 382, a: 0, len: 72, wid: 28 },
               { x: SX+72, y: 382, a: 0, len: 72, wid: 28 } ] });
 
+    // ===== 實際情況的複雜場景 =====
+
+    // 9. 倒車入庫（兩側有車）：在停滿車的場子，沿車道開過去再倒車入庫
+    L.push({ name: "倒車入庫（兩側有車）", diff: 4,
+      desc: "沿著上方車道把車開過去，再倒車進中央空位。兩側都是車，後方有輪擋。",
+      start: { x: 180, y: 312, a: 0 },
+      spot:  { x: SX, y: 398, a: 90*D, len: 62, wid: 28 },
+      walls: [ { x: SX-18, y: 438, w: 36, h: 6 } ],          // 輪擋
+      cars: [ { x: SX-33, y: 398, a: 90*D, len: 62, wid: 26 }, { x: SX+33, y: 398, a: 90*D, len: 62, wid: 26 },
+              { x: SX-99, y: 398, a: 90*D, len: 62, wid: 26 }, { x: SX+99, y: 398, a: 90*D, len: 62, wid: 26 },
+              { x: SX-165, y: 398, a: 90*D, len: 62, wid: 26 }, { x: SX+165, y: 398, a: 90*D, len: 62, wid: 26 },
+              { x: SX-99, y: 224, a: 90*D, len: 62, wid: 26 }, { x: SX-33, y: 224, a: 90*D, len: 62, wid: 26 },
+              { x: SX+33, y: 224, a: 90*D, len: 62, wid: 26 }, { x: SX+99, y: 224, a: 90*D, len: 62, wid: 26 } ] });
+
+    // 10. 立柱旁倒庫：地下停車場常見，車位一角有柱子
+    L.push({ name: "立柱旁倒庫", diff: 4,
+      desc: "倒車入庫，左前角有根柱子卡住迴轉空間，右邊還有一台車，別擦到。",
+      start: { x: 180, y: 312, a: 0 },
+      spot:  { x: SX, y: 398, a: 90*D, len: 62, wid: 28 },
+      walls: [ { x: SX-46, y: 330, w: 18, h: 46 } ],         // 柱子
+      cars: [ { x: SX+33, y: 398, a: 90*D, len: 62, wid: 26 },
+              { x: SX-99, y: 398, a: 90*D, len: 62, wid: 26 }, { x: SX+99, y: 398, a: 90*D, len: 62, wid: 26 },
+              { x: SX-99, y: 224, a: 90*D, len: 62, wid: 26 }, { x: SX+33, y: 224, a: 90*D, len: 62, wid: 26 },
+              { x: SX+99, y: 224, a: 90*D, len: 62, wid: 26 } ] });
+
+    // 11. 側方受阻（右打滿后退）：入口被斜出的車擋住的側方停車
+    L.push({ name: "側方受阻", diff: 5,
+      desc: "側方停車，入口被上方突出的車擋住一半，要先繞、再右打滿倒車塞進去。",
+      start: { x: 250, y: 345, a: 0 },
+      spot:  { x: SX, y: 382, a: 0, len: 72, wid: 28 },
+      walls: [ { x: 80, y: 420, w: W-160, h: 30 } ],
+      cars: [ { x: SX-74, y: 382, a: 0, len: 72, wid: 28 }, { x: SX+74, y: 382, a: 0, len: 72, wid: 28 },
+              { x: SX-95, y: 330, a: 90*D, len: 64, wid: 26 } ] });
+
+    // 12. 雙向窄道倒庫：對向就是牆/車，車道很窄，要分幾次進退
+    L.push({ name: "雙向窄道倒庫", diff: 5,
+      desc: "車道很窄、對向就是牆，迴旋空間不夠，多半要前後修正好幾次才倒得進去。",
+      start: { x: 180, y: 335, a: 0 },
+      spot:  { x: SX, y: 408, a: 90*D, len: 58, wid: 28 },
+      walls: [ { x: 80, y: 293, w: W-160, h: 14 } ],         // 對向牆
+      cars: [ { x: SX-33, y: 408, a: 90*D, len: 58, wid: 26 },
+              { x: SX+33, y: 408, a: 90*D, len: 58, wid: 26 } ] });
+
     for (const lv of L) {
       lv.walls = lv.walls.concat([
         { x: 0, y: 0, w: W, h: border }, { x: 0, y: H-border, w: W, h: border },
