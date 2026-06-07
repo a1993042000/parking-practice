@@ -6,7 +6,7 @@
 (() => {
   "use strict";
 
-  const WORLD = { w: 1280, h: 560 };   // 寬扁比例（~2.3:1），高度不再過長
+  const WORLD = { w: 1300, h: 500 };   // 更寬扁（2.6:1），高度更低
   const SCALE = 13;            // world units (px) per metre
   const canvas = document.getElementById("game");
   const ctx = canvas.getContext("2d");
@@ -61,60 +61,61 @@
   function buildLevels() {
     const W = WORLD.w, H = WORLD.h, border = 14;
     const SX = W / 2;            // 車位永遠水平置中，靠下擺放
+    // 台灣車格尺寸：寬約 2.1m、長約 5~6m（SCALE=13px/m）
     const L = [];
 
     // 1. 暖身：直接開進
     L.push({ name: "暖身：開進車位", diff: 1,
-      desc: "把車往下開進中間靠下的綠色車位並對正。",
-      start: { x: SX, y: 110, a: 90*D },
-      spot:  { x: SX, y: 410, a: 90*D, len: 80, wid: 44 },
+      desc: "把車往下開進中間靠下的綠色車位並對正（車格只比車身寬一點點）。",
+      start: { x: SX, y: 90, a: 90*D },
+      spot:  { x: SX, y: 360, a: 90*D, len: 66, wid: 28 },
       walls: [], cars: [] });
 
     // 2. 垂直停車（夾縫）
-    L.push({ name: "垂直停車（夾縫）", diff: 2,
-      desc: "從上方開下來，停進兩車中間的垂直車位，注意左右車輛與內輪差。",
-      start: { x: SX, y: 110, a: 90*D },
-      spot:  { x: SX, y: 410, a: 90*D, len: 80, wid: 46 },
-      walls: [ { x: 220, y: 470, w: W-440, h: 12 } ],
-      cars: [ { x: SX-112, y: 410, a: 90*D, len: 78, wid: 26 },
-              { x: SX+112, y: 410, a: 90*D, len: 78, wid: 26 } ] });
+    L.push({ name: "垂直停車（夾縫）", diff: 3,
+      desc: "從上方開下來，停進兩車中間的窄垂直車位，左右只有幾公分縫隙。",
+      start: { x: SX, y: 90, a: 90*D },
+      spot:  { x: SX, y: 360, a: 90*D, len: 66, wid: 27 },
+      walls: [ { x: 250, y: 418, w: W-500, h: 12 } ],
+      cars: [ { x: SX-30, y: 360, a: 90*D, len: 70, wid: 26 },
+              { x: SX+30, y: 360, a: 90*D, len: 70, wid: 26 } ] });
 
     // 3. 路邊平行停車
     L.push({ name: "路邊平行停車", diff: 3,
       desc: "沿著行車道往右開，倒車進入中間靠下、兩車之間的平行車位。",
-      start: { x: 280, y: 360, a: 0 },
-      spot:  { x: SX, y: 432, a: 0, len: 100, wid: 40 },
-      walls: [ { x: 80, y: 474, w: W-160, h: 40 } ],
-      cars: [ { x: SX-118, y: 432, a: 0, len: 74, wid: 28 },
-              { x: SX+118, y: 432, a: 0, len: 74, wid: 28 } ] });
+      start: { x: 250, y: 320, a: 0 },
+      spot:  { x: SX, y: 372, a: 0, len: 80, wid: 30 },
+      walls: [ { x: 80, y: 414, w: W-160, h: 40 } ],
+      cars: [ { x: SX-80, y: 372, a: 0, len: 74, wid: 28 },
+              { x: SX+80, y: 372, a: 0, len: 74, wid: 28 } ] });
 
     // 4. 窄車庫倒車
-    L.push({ name: "窄車庫倒車", diff: 3,
-      desc: "倒車進入中間靠下的窄車庫，三面是牆、開口朝上。",
-      start: { x: SX, y: 150, a: -90*D },
-      spot:  { x: SX, y: 412, a: 90*D, len: 76, wid: 44 },
-      walls: [ { x: SX-44, y: 352, w: 10, h: 140 },
-               { x: SX+34, y: 352, w: 10, h: 140 },
-               { x: SX-44, y: 482, w: 88, h: 10 } ],
+    L.push({ name: "窄車庫倒車", diff: 4,
+      desc: "倒車進入中間靠下的窄車庫，三面是牆、開口朝上，左右幾乎沒餘裕。",
+      start: { x: SX, y: 110, a: -90*D },
+      spot:  { x: SX, y: 362, a: 90*D, len: 64, wid: 28 },
+      walls: [ { x: 622, y: 300, w: 10, h: 130 },
+               { x: 668, y: 300, w: 10, h: 130 },
+               { x: 622, y: 430, w: 56, h: 10 } ],
       cars: [] });
 
     // 5. S 型窄巷
     L.push({ name: "S 型窄巷", diff: 4,
       desc: "由上往下穿過 S 型窄巷（先右、再左），最後停進中間靠下的車位。",
-      start: { x: 940, y: 70, a: 90*D },
-      spot:  { x: SX, y: 442, a: 90*D, len: 84, wid: 46 },
-      walls: [ { x: 14, y: 176, w: 780, h: 16 },
-               { x: 500, y: 300, w: W-514, h: 16 } ],
+      start: { x: 980, y: 70, a: 90*D },
+      spot:  { x: SX, y: 388, a: 90*D, len: 64, wid: 30 },
+      walls: [ { x: 14, y: 160, w: 800, h: 16 },
+               { x: 486, y: 270, w: W-500, h: 16 } ],
       cars: [] });
 
     // 6. 緊密平行停車
     L.push({ name: "緊密平行停車", diff: 5,
-      desc: "高難度：兩車之間只有一點點空間，善用後輪內輪差才停得進去。",
-      start: { x: 280, y: 360, a: 0 },
-      spot:  { x: SX, y: 434, a: 0, len: 86, wid: 36 },
-      walls: [ { x: 80, y: 476, w: W-160, h: 40 } ],
-      cars: [ { x: SX-86, y: 434, a: 0, len: 72, wid: 28 },
-              { x: SX+86, y: 434, a: 0, len: 72, wid: 28 } ] });
+      desc: "高難度：前後兩車之間只剩一台車多一點的空間，善用後輪內輪差才停得進去。",
+      start: { x: 250, y: 320, a: 0 },
+      spot:  { x: SX, y: 374, a: 0, len: 72, wid: 28 },
+      walls: [ { x: 80, y: 414, w: W-160, h: 40 } ],
+      cars: [ { x: SX-72, y: 374, a: 0, len: 72, wid: 28 },
+              { x: SX+72, y: 374, a: 0, len: 72, wid: 28 } ] });
 
     for (const lv of L) {
       lv.walls = lv.walls.concat([
@@ -224,7 +225,7 @@
   }
 
   // ---- physics ----
-  const MAX_FWD = 115, MAX_REV = 72, ACCEL = 175, BRAKE = 230, ROLL = 70;
+  const MAX_FWD = 150, MAX_REV = 96, ACCEL = 215, BRAKE = 230, ROLL = 70;
   const MAX_STEER = 36*D, STEER_RATE = 130*D, STEER_RETURN = 170*D;
   let bumpFlash = 0;
   let trackAccum = 0;
