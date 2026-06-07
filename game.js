@@ -61,14 +61,14 @@
   function buildLevels() {
     const W = WORLD.w, H = WORLD.h, border = 14;
     const SX = W / 2;            // 車位永遠水平置中，靠下擺放
-    // 台灣車格尺寸：寬約 2.1m、長約 5~6m（SCALE=13px/m）。全部為中高難度。
+    // 車格尺寸統一：長 5.2m × 寬 2.2m（= 68 × 29 px，SCALE=13）。全部為中高難度。
     const L = [];
 
     // 1. 垂直夾縫
     L.push({ name: "垂直夾縫", diff: 3,
       desc: "從上方開下來，停進兩車中間的窄垂直車位，左右只有幾公分縫隙。",
       start: { x: SX, y: 90, a: 90*D },
-      spot:  { x: SX, y: 360, a: 90*D, len: 66, wid: 28 },
+      spot:  { x: SX, y: 360, a: 90*D, len: 68, wid: 29 },
       walls: [ { x: 250, y: 418, w: W-500, h: 12 } ],
       cars: [ { x: SX-31, y: 360, a: 90*D, len: 70, wid: 26 },
               { x: SX+31, y: 360, a: 90*D, len: 70, wid: 26 } ] });
@@ -77,7 +77,7 @@
     L.push({ name: "窄車庫倒車", diff: 4,
       desc: "倒車進入中間靠下的窄車庫，三面是牆、開口朝上，左右幾乎沒餘裕。",
       start: { x: SX, y: 110, a: -90*D },
-      spot:  { x: SX, y: 362, a: 90*D, len: 64, wid: 28 },
+      spot:  { x: SX, y: 362, a: 90*D, len: 68, wid: 29 },
       walls: [ { x: 622, y: 300, w: 10, h: 130 },
                { x: 668, y: 300, w: 10, h: 130 },
                { x: 622, y: 430, w: 56, h: 10 } ],
@@ -87,7 +87,7 @@
     L.push({ name: "S 型窄巷", diff: 4,
       desc: "由上往下穿過 S 型窄巷（先右、再左），最後停進中間靠下的車位。",
       start: { x: 980, y: 70, a: 90*D },
-      spot:  { x: SX, y: 388, a: 90*D, len: 64, wid: 30 },
+      spot:  { x: SX, y: 388, a: 90*D, len: 68, wid: 29 },
       walls: [ { x: 14, y: 160, w: 800, h: 16 },
                { x: 486, y: 270, w: W-500, h: 16 } ],
       cars: [] });
@@ -96,7 +96,7 @@
     L.push({ name: "偏移夾縫", diff: 4,
       desc: "上方擋牆只留右側通道，先往下繞過再切回中間，停進兩車間的窄縫。",
       start: { x: 980, y: 95, a: 90*D },
-      spot:  { x: SX, y: 378, a: 90*D, len: 64, wid: 28 },
+      spot:  { x: SX, y: 378, a: 90*D, len: 68, wid: 29 },
       walls: [ { x: 14, y: 250, w: 720, h: 16 },
                { x: 250, y: 440, w: W-500, h: 12 } ],
       cars: [ { x: SX-31, y: 378, a: 90*D, len: 70, wid: 26 },
@@ -106,7 +106,7 @@
     L.push({ name: "緊密平行停車", diff: 5,
       desc: "前後兩車之間只剩一台車多一點的空間，善用後輪內輪差才停得進去。",
       start: { x: 250, y: 320, a: 0 },
-      spot:  { x: SX, y: 374, a: 0, len: 72, wid: 28 },
+      spot:  { x: SX, y: 374, a: 0, len: 68, wid: 29 },
       walls: [ { x: 80, y: 414, w: W-160, h: 40 } ],
       cars: [ { x: SX-72, y: 374, a: 0, len: 72, wid: 28 },
               { x: SX+72, y: 374, a: 0, len: 72, wid: 28 } ] });
@@ -115,7 +115,7 @@
     L.push({ name: "雙彎進垂直", diff: 5,
       desc: "連續兩道擋牆（先右、後左）穿過後，立刻切進中央兩車間的窄垂直車位。",
       start: { x: 1030, y: 70, a: 90*D },
-      spot:  { x: SX, y: 400, a: 90*D, len: 58, wid: 28 },
+      spot:  { x: SX, y: 400, a: 90*D, len: 68, wid: 29 },
       walls: [ { x: 14, y: 168, w: 840, h: 16 },
                { x: 440, y: 275, w: W-454, h: 16 } ],
       cars: [ { x: SX-31, y: 400, a: 90*D, len: 62, wid: 26 },
@@ -125,7 +125,7 @@
     L.push({ name: "淺窄夾縫", diff: 5,
       desc: "車格又窄又淺，後方緊貼牆面、左右又是車，前後左右都只有幾公分。",
       start: { x: SX, y: 90, a: 90*D },
-      spot:  { x: SX, y: 372, a: 90*D, len: 58, wid: 27 },
+      spot:  { x: SX, y: 372, a: 90*D, len: 68, wid: 29 },
       walls: [ { x: 250, y: 408, w: W-500, h: 14 } ],
       cars: [ { x: SX-30, y: 372, a: 90*D, len: 72, wid: 26 },
               { x: SX+30, y: 372, a: 90*D, len: 72, wid: 26 } ] });
@@ -134,7 +134,7 @@
     L.push({ name: "窄路平行", diff: 5,
       desc: "馬路窄、對向就是牆，迴旋空間很小，還要倒車塞進前後夾縫。",
       start: { x: 250, y: 348, a: 0 },
-      spot:  { x: SX, y: 382, a: 0, len: 68, wid: 28 },
+      spot:  { x: SX, y: 382, a: 0, len: 68, wid: 29 },
       walls: [ { x: 80, y: 422, w: W-160, h: 30 },
                { x: 80, y: 308, w: W-160, h: 12 } ],
       cars: [ { x: SX-72, y: 382, a: 0, len: 72, wid: 28 },
@@ -146,7 +146,7 @@
     L.push({ name: "倒車入庫（兩側有車）", diff: 4,
       desc: "沿著上方車道把車開過去，再倒車進中央空位。兩側都是車，後方有輪擋。",
       start: { x: 180, y: 312, a: 0 },
-      spot:  { x: SX, y: 398, a: 90*D, len: 62, wid: 28 },
+      spot:  { x: SX, y: 398, a: 90*D, len: 68, wid: 29 },
       walls: [ { x: SX-18, y: 438, w: 36, h: 6 } ],          // 輪擋
       cars: [ { x: SX-33, y: 398, a: 90*D, len: 62, wid: 26 }, { x: SX+33, y: 398, a: 90*D, len: 62, wid: 26 },
               { x: SX-99, y: 398, a: 90*D, len: 62, wid: 26 }, { x: SX+99, y: 398, a: 90*D, len: 62, wid: 26 },
@@ -158,7 +158,7 @@
     L.push({ name: "立柱旁倒庫", diff: 4,
       desc: "倒車入庫，左前角有根柱子卡住迴轉空間，右邊還有一台車，別擦到。",
       start: { x: 180, y: 312, a: 0 },
-      spot:  { x: SX, y: 398, a: 90*D, len: 62, wid: 28 },
+      spot:  { x: SX, y: 398, a: 90*D, len: 68, wid: 29 },
       walls: [ { x: SX-46, y: 330, w: 18, h: 46 } ],         // 柱子
       cars: [ { x: SX+33, y: 398, a: 90*D, len: 62, wid: 26 },
               { x: SX-99, y: 398, a: 90*D, len: 62, wid: 26 }, { x: SX+99, y: 398, a: 90*D, len: 62, wid: 26 },
@@ -169,7 +169,7 @@
     L.push({ name: "側方受阻", diff: 5,
       desc: "側方停車，入口被上方突出的車擋住一半，要先繞、再右打滿倒車塞進去。",
       start: { x: 250, y: 345, a: 0 },
-      spot:  { x: SX, y: 382, a: 0, len: 72, wid: 28 },
+      spot:  { x: SX, y: 382, a: 0, len: 68, wid: 29 },
       walls: [ { x: 80, y: 420, w: W-160, h: 30 } ],
       cars: [ { x: SX-74, y: 382, a: 0, len: 72, wid: 28 }, { x: SX+74, y: 382, a: 0, len: 72, wid: 28 },
               { x: SX-95, y: 330, a: 90*D, len: 64, wid: 26 } ] });
@@ -178,7 +178,7 @@
     L.push({ name: "雙向窄道倒庫", diff: 5,
       desc: "車道很窄、對向就是牆，迴旋空間不夠，多半要前後修正好幾次才倒得進去。",
       start: { x: 180, y: 335, a: 0 },
-      spot:  { x: SX, y: 408, a: 90*D, len: 58, wid: 28 },
+      spot:  { x: SX, y: 408, a: 90*D, len: 68, wid: 29 },
       walls: [ { x: 80, y: 293, w: W-160, h: 14 } ],         // 對向牆
       cars: [ { x: SX-33, y: 408, a: 90*D, len: 58, wid: 26 },
               { x: SX+33, y: 408, a: 90*D, len: 58, wid: 26 } ] });
@@ -187,7 +187,7 @@
     L.push({ name: "斜角停車", diff: 4,
       desc: "賣場、路邊常見的斜向車格，沿車道過去再順著角度斜斜開進去並對正。",
       start: { x: 200, y: 300, a: 0 },
-      spot:  { x: SX, y: 378, a: 55*D, len: 64, wid: 28 },
+      spot:  { x: SX, y: 378, a: 55*D, len: 68, wid: 29 },
       walls: [],
       cars: [ { x: SX-34, y: 378, a: 55*D, len: 64, wid: 26 }, { x: SX+34, y: 378, a: 55*D, len: 64, wid: 26 },
               { x: SX-68, y: 378, a: 55*D, len: 64, wid: 26 }, { x: SX+68, y: 378, a: 55*D, len: 64, wid: 26 } ] });
@@ -196,7 +196,7 @@
     L.push({ name: "死巷窄道倒庫", diff: 5,
       desc: "死巷裡的窄車道，前方很快到底、對向又是牆，幾乎要原地倒車入庫，得多次前後修正。",
       start: { x: 180, y: 330, a: 0 },
-      spot:  { x: SX, y: 400, a: 90*D, len: 60, wid: 28 },
+      spot:  { x: SX, y: 400, a: 90*D, len: 68, wid: 29 },
       walls: [ { x: 80, y: 270, w: W-160, h: 12 },           // 對向牆
                { x: 760, y: 270, w: 16, h: 130 } ],          // 死巷底
       cars: [ { x: SX-33, y: 400, a: 90*D, len: 60, wid: 26 },
@@ -206,7 +206,7 @@
     L.push({ name: "柱間超窄格", diff: 5,
       desc: "車格兩側是水泥柱（不是車），左右各只剩幾公分，最容易擦到輪圈和鈑金。",
       start: { x: 180, y: 300, a: 0 },
-      spot:  { x: SX, y: 398, a: 90*D, len: 62, wid: 27 },
+      spot:  { x: SX, y: 398, a: 90*D, len: 68, wid: 29 },
       walls: [ { x: SX-33, y: 340, w: 16, h: 80 },           // 左柱
                { x: SX+17, y: 340, w: 16, h: 80 } ],         // 右柱
       cars: [ { x: SX-92, y: 398, a: 90*D, len: 62, wid: 26 }, { x: SX+92, y: 398, a: 90*D, len: 62, wid: 26 },
@@ -217,7 +217,7 @@
     L.push({ name: "滿場倒庫（對面有車）", diff: 5,
       desc: "整個停滿，正對面也停了一台車擋住，沒法直直退，要繞角度右打滿倒進中央空位。",
       start: { x: 180, y: 326, a: 0 },
-      spot:  { x: SX, y: 400, a: 90*D, len: 62, wid: 28 },
+      spot:  { x: SX, y: 400, a: 90*D, len: 68, wid: 29 },
       walls: [ { x: SX-18, y: 438, w: 36, h: 6 } ],          // 輪擋
       cars: [ { x: SX-33, y: 400, a: 90*D, len: 62, wid: 26 }, { x: SX+33, y: 400, a: 90*D, len: 62, wid: 26 },
               { x: SX-99, y: 400, a: 90*D, len: 62, wid: 26 }, { x: SX+99, y: 400, a: 90*D, len: 62, wid: 26 },
@@ -229,7 +229,7 @@
     L.push({ name: "車頭朝裡入庫", diff: 4,
       desc: "沿車道開過去後，車頭朝裡「前進」開進中央空位，底部就是牆，停太前會頂到。",
       start: { x: 180, y: 300, a: 0 },
-      spot:  { x: SX, y: 398, a: 90*D, len: 60, wid: 28 },
+      spot:  { x: SX, y: 398, a: 90*D, len: 68, wid: 29 },
       walls: [ { x: 260, y: 436, w: W-520, h: 12 } ],        // 庫底牆
       cars: [ { x: SX-33, y: 398, a: 90*D, len: 60, wid: 26 }, { x: SX+33, y: 398, a: 90*D, len: 60, wid: 26 },
               { x: SX-99, y: 398, a: 90*D, len: 60, wid: 26 }, { x: SX+99, y: 398, a: 90*D, len: 60, wid: 26 },
