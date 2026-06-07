@@ -13,9 +13,15 @@
   const view = { scale: 1 };
 
   function resize() {
-    const cssW = canvas.clientWidth;
-    const cssH = Math.round(cssW * WORLD.h / WORLD.w);
-    canvas.style.height = cssH + "px";
+    const stage = document.getElementById("stage");
+    const availW = stage.clientWidth;
+    const availH = stage.clientHeight || Math.round(window.innerHeight * 0.5);
+    // 等比縮放，讓整個棋盤「contain」進可用區域，高度不再過長
+    let cssW = availW;
+    let cssH = cssW * WORLD.h / WORLD.w;
+    if (cssH > availH) { cssH = availH; cssW = cssH * WORLD.w / WORLD.h; }
+    canvas.style.width = Math.floor(cssW) + "px";
+    canvas.style.height = Math.floor(cssH) + "px";
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
     canvas.width = Math.round(cssW * dpr);
     canvas.height = Math.round(cssH * dpr);

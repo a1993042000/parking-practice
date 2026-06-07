@@ -29,26 +29,6 @@
     <div class="hud-item">時間 <b id="hudTime">0.0s</b></div>
   </div>
 
-  <div id="wheelWrap">
-    <svg id="wheel" viewBox="-100 -100 200 200" aria-label="方向盤">
-      <g id="wheelRot">
-        <circle cx="0" cy="0" r="84" fill="none" stroke="#20262d" stroke-width="22"/>
-        <circle cx="0" cy="0" r="84" fill="none" stroke="#5b6675" stroke-width="12"/>
-        <g fill="#4a525c">
-          <rect x="0" y="-7" width="80" height="14" rx="7"/>
-          <g transform="rotate(120)"><rect x="0" y="-7" width="80" height="14" rx="7"/></g>
-          <g transform="rotate(240)"><rect x="0" y="-7" width="80" height="14" rx="7"/></g>
-        </g>
-        <circle cx="0" cy="0" r="24" fill="#4aa3ff"/>
-        <rect x="-6" y="-94" width="12" height="22" rx="4" fill="#ff5d52"/>
-      </g>
-    </svg>
-    <div class="wheel-info">
-      <span id="wheelAngle">回正</span>
-      <button id="wheelCenter" class="btn">↺ 回正</button>
-    </div>
-  </div>
-
   <div id="controls">
     <div class="sliders">
       <label>車長 <span id="lenVal">4.6</span> m
@@ -62,6 +42,26 @@
       </label>
       <label class="toggle"><input type="checkbox" id="showTracks" checked /> 顯示輪胎軌跡（看內輪差）</label>
       <button id="resetBtn" class="btn">重置 (R)</button>
+    </div>
+
+    <div id="wheelWrap">
+      <svg id="wheel" viewBox="-100 -100 200 200" aria-label="方向盤">
+        <g id="wheelRot">
+          <circle cx="0" cy="0" r="84" fill="none" stroke="#20262d" stroke-width="22"/>
+          <circle cx="0" cy="0" r="84" fill="none" stroke="#5b6675" stroke-width="12"/>
+          <g fill="#4a525c">
+            <rect x="0" y="-7" width="80" height="14" rx="7"/>
+            <g transform="rotate(120)"><rect x="0" y="-7" width="80" height="14" rx="7"/></g>
+            <g transform="rotate(240)"><rect x="0" y="-7" width="80" height="14" rx="7"/></g>
+          </g>
+          <circle cx="0" cy="0" r="24" fill="#4aa3ff"/>
+          <rect x="-6" y="-94" width="12" height="22" rx="4" fill="#ff5d52"/>
+        </g>
+      </svg>
+      <div class="wheel-info">
+        <span id="wheelAngle">回正</span>
+        <button id="wheelCenter" class="btn">↺ 回正</button>
+      </div>
     </div>
 
     <div class="pad">

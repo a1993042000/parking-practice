@@ -17,12 +17,13 @@ html, body {
   overscroll-behavior: none;
 }
 #app {
-  max-width: 760px;
+  max-width: 1000px;
+  min-height: 100dvh;
   margin: 0 auto;
-  padding: 10px 12px 28px;
+  padding: 8px 12px 12px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
 }
 header {
   display: flex;
@@ -40,14 +41,22 @@ header {
 .level-nav button:active { background: #313942; }
 #levelLabel { font-size: 13px; color: var(--muted); min-width: 120px; text-align: center; }
 
-#stage { position: relative; width: 100%; }
+#stage {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 canvas {
-  width: 100%;
   display: block;
   background: #2b3138;
   border: 1px solid #3a424d;
   border-radius: 10px;
   touch-action: none;
+  max-width: 100%;
+  max-height: 100%;
 }
 #banner {
   position: absolute; inset: 0;
@@ -73,22 +82,21 @@ canvas {
 .hud-item b { color: var(--ink); font-size: 15px; }
 
 #wheelWrap {
-  display: flex; flex-direction: column; align-items: center; gap: 8px;
-  padding: 6px 0 2px;
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
 }
 #wheel {
-  width: 168px; height: 168px;
+  width: 132px; height: 132px;
   filter: drop-shadow(0 3px 8px rgba(0,0,0,0.45));
   touch-action: none;
 }
-.wheel-info { display: flex; align-items: center; gap: 14px; }
+.wheel-info { display: flex; flex-direction: column; align-items: center; gap: 6px; }
 #wheelAngle {
-  font-size: 15px; color: var(--accent2); font-weight: 700;
-  min-width: 60px; text-align: center;
+  font-size: 14px; color: var(--accent2); font-weight: 700;
+  min-width: 56px; text-align: center;
 }
 
 #controls {
-  display: flex; gap: 14px; align-items: flex-start; flex-wrap: wrap;
+  display: flex; gap: 16px; align-items: center; flex-wrap: wrap;
   justify-content: space-between;
 }
 .sliders { display: flex; flex-direction: column; gap: 10px; flex: 1; min-width: 220px; }
