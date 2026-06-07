@@ -183,6 +183,36 @@
       cars: [ { x: SX-33, y: 408, a: 90*D, len: 58, wid: 26 },
               { x: SX+33, y: 408, a: 90*D, len: 58, wid: 26 } ] });
 
+    // 13. 斜角（斜向）停車：賣場/路邊常見的傾斜車格
+    L.push({ name: "斜角停車", diff: 4,
+      desc: "賣場、路邊常見的斜向車格，沿車道過去再順著角度斜斜開進去並對正。",
+      start: { x: 200, y: 300, a: 0 },
+      spot:  { x: SX, y: 378, a: 55*D, len: 64, wid: 28 },
+      walls: [],
+      cars: [ { x: SX-34, y: 378, a: 55*D, len: 64, wid: 26 }, { x: SX+34, y: 378, a: 55*D, len: 64, wid: 26 },
+              { x: SX-68, y: 378, a: 55*D, len: 64, wid: 26 }, { x: SX+68, y: 378, a: 55*D, len: 64, wid: 26 } ] });
+
+    // 14. 死巷窄道倒庫：前方到底、對向是牆，幾乎要原地倒進去
+    L.push({ name: "死巷窄道倒庫", diff: 5,
+      desc: "死巷裡的窄車道，前方很快到底、對向又是牆，幾乎要原地倒車入庫，得多次前後修正。",
+      start: { x: 180, y: 330, a: 0 },
+      spot:  { x: SX, y: 400, a: 90*D, len: 60, wid: 28 },
+      walls: [ { x: 80, y: 270, w: W-160, h: 12 },           // 對向牆
+               { x: 760, y: 270, w: 16, h: 130 } ],          // 死巷底
+      cars: [ { x: SX-33, y: 400, a: 90*D, len: 60, wid: 26 },
+              { x: SX+33, y: 400, a: 90*D, len: 60, wid: 26 } ] });
+
+    // 15. 柱間超窄格：兩側是水泥柱，最容易擦輪圈
+    L.push({ name: "柱間超窄格", diff: 5,
+      desc: "車格兩側是水泥柱（不是車），左右各只剩幾公分，最容易擦到輪圈和鈑金。",
+      start: { x: 180, y: 300, a: 0 },
+      spot:  { x: SX, y: 398, a: 90*D, len: 62, wid: 27 },
+      walls: [ { x: SX-33, y: 340, w: 16, h: 80 },           // 左柱
+               { x: SX+17, y: 340, w: 16, h: 80 } ],         // 右柱
+      cars: [ { x: SX-92, y: 398, a: 90*D, len: 62, wid: 26 }, { x: SX+92, y: 398, a: 90*D, len: 62, wid: 26 },
+              { x: SX-92, y: 224, a: 90*D, len: 62, wid: 26 }, { x: SX-26, y: 224, a: 90*D, len: 62, wid: 26 },
+              { x: SX+26, y: 224, a: 90*D, len: 62, wid: 26 }, { x: SX+92, y: 224, a: 90*D, len: 62, wid: 26 } ] });
+
     for (const lv of L) {
       lv.walls = lv.walls.concat([
         { x: 0, y: 0, w: W, h: border }, { x: 0, y: H-border, w: W, h: border },
