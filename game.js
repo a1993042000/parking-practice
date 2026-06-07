@@ -221,16 +221,14 @@
     state.time += dt;
     state.bumpCool = Math.max(0, state.bumpCool - dt);
 
+    // 左右方向鍵轉動方向盤；放開後保持角度，不自動回正
     if (input.left && !input.right) car.steer = Math.max(-MAX_STEER, car.steer - STEER_RATE*dt);
     else if (input.right && !input.left) car.steer = Math.min(MAX_STEER, car.steer + STEER_RATE*dt);
-    else if (car.steer > 0) car.steer = Math.max(0, car.steer - STEER_RETURN*dt);
-    else car.steer = Math.min(0, car.steer + STEER_RETURN*dt);
 
-    if (input.brake) {
-      if (car.v > 0) car.v = Math.max(0, car.v - BRAKE*dt); else car.v = Math.min(0, car.v + BRAKE*dt);
-    } else if (input.up && !input.down) car.v += ACCEL*dt;
-    else if (input.down && !input.up) car.v -= ACCEL*dt;
-    else if (car.v > 0) car.v = Math.max(0, car.v - ROLL*dt); else car.v = Math.min(0, car.v + ROLL*dt);
+    // 油門：有壓上/下鍵車才前進/後退；放開（或踩煞車）立刻停止，不滑行
+    if (input.up && !input.down && !input.brake) car.v += ACCEL*dt;
+    else if (input.down && !input.up && !input.brake) car.v -= ACCEL*dt;
+    else car.v = 0;
     car.v = Math.max(-MAX_REV, Math.min(MAX_FWD, car.v));
 
     // rear-axle kinematic bicycle model
@@ -335,6 +333,16 @@
     drawWheel(ax.fl, car.a + car.steer); drawWheel(ax.fr, car.a + car.steer);
 
     if (bumpFlash > 0) bumpFlash = Math.max(0, bumpFlash - 0.016);
+
+    // 下方方向盤 UI：依目前轉向角同步旋轉
+    if (wheelRotEl) {
+      const deg = (car.steer / MAX_STEER) * 140;   // 滿舵 = 視覺上轉 140°
+      wheelRotEl.setAttribute("transform", `rotate(${deg.toFixed(1)})`);
+    }
+    if (wheelAngleEl) {
+      const pct = Math.round(car.steer / MAX_STEER * 100);
+      wheelAngleEl.textContent = pct === 0 ? "回正" : (pct < 0 ? `左 ${-pct}%` : `右 ${pct}%`);
+    }
   }
 
   // ---- loop ----
@@ -361,6 +369,12 @@
     btn.addEventListener("pointerdown", on); btn.addEventListener("pointerup", off);
     btn.addEventListener("pointerleave", off); btn.addEventListener("pointercancel", off);
   });
+
+  // steering wheel widget
+  const wheelRotEl = document.getElementById("wheelRot");
+  const wheelAngleEl = document.getElementById("wheelAngle");
+  const wheelCenterBtn = document.getElementById("wheelCenter");
+  if (wheelCenterBtn) wheelCenterBtn.addEventListener("click", () => { car.steer = 0; });
 
   // sliders
   const lenS = document.getElementById("carLen");

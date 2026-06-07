@@ -29,6 +29,26 @@
     <div class="hud-item">時間 <b id="hudTime">0.0s</b></div>
   </div>
 
+  <div id="wheelWrap">
+    <svg id="wheel" viewBox="-100 -100 200 200" aria-label="方向盤">
+      <g id="wheelRot">
+        <circle cx="0" cy="0" r="84" fill="none" stroke="#20262d" stroke-width="22"/>
+        <circle cx="0" cy="0" r="84" fill="none" stroke="#5b6675" stroke-width="12"/>
+        <g fill="#4a525c">
+          <rect x="0" y="-7" width="80" height="14" rx="7"/>
+          <g transform="rotate(120)"><rect x="0" y="-7" width="80" height="14" rx="7"/></g>
+          <g transform="rotate(240)"><rect x="0" y="-7" width="80" height="14" rx="7"/></g>
+        </g>
+        <circle cx="0" cy="0" r="24" fill="#4aa3ff"/>
+        <rect x="-6" y="-94" width="12" height="22" rx="4" fill="#ff5d52"/>
+      </g>
+    </svg>
+    <div class="wheel-info">
+      <span id="wheelAngle">回正</span>
+      <button id="wheelCenter" class="btn">↺ 回正</button>
+    </div>
+  </div>
+
   <div id="controls">
     <div class="sliders">
       <label>車長 <span id="lenVal">4.6</span> m
@@ -56,7 +76,7 @@
     </div>
   </div>
 
-  <p id="hint">鍵盤：方向鍵 / WASD 駕駛，空白鍵煞車，R 重置。只有<b>前輪</b>會轉向、後輪固定，轉彎時後輪會內切（內輪差）——橘色是後輪軌跡、藍色是前輪，注意兩者的差距。把車「完整開進」綠色車位並對正即過關。</p>
+  <p id="hint">操作：<b>左／右</b>方向鍵轉動下方方向盤（放開後會<b>保持角度、不自動回正</b>，按「↺ 回正」可歸零）；<b>上／下</b>方向鍵前進／後退，<b>鬆開立刻停車</b>（不會滑行）。R 重置。只有<b>前輪</b>會轉向、後輪固定，轉彎時後輪會內切（內輪差）——橘色是後輪軌跡、藍色是前輪。把車「完整開進」綠色車位並對正即過關。</p>
   <p id="desc"></p>
 </div>
 <script src="game.js"></script>

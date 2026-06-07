@@ -72,6 +72,21 @@ canvas {
 }
 .hud-item b { color: var(--ink); font-size: 15px; }
 
+#wheelWrap {
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  padding: 6px 0 2px;
+}
+#wheel {
+  width: 168px; height: 168px;
+  filter: drop-shadow(0 3px 8px rgba(0,0,0,0.45));
+  touch-action: none;
+}
+.wheel-info { display: flex; align-items: center; gap: 14px; }
+#wheelAngle {
+  font-size: 15px; color: var(--accent2); font-weight: 700;
+  min-width: 60px; text-align: center;
+}
+
 #controls {
   display: flex; gap: 14px; align-items: flex-start; flex-wrap: wrap;
   justify-content: space-between;
