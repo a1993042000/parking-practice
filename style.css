@@ -79,6 +79,8 @@ canvas {
 .sliders { display: flex; flex-direction: column; gap: 10px; flex: 1; min-width: 220px; }
 .sliders label { font-size: 13px; color: var(--muted); display: flex; flex-direction: column; gap: 4px; }
 .sliders label span { color: var(--ink); font-weight: 700; }
+.sliders label.toggle { flex-direction: row; align-items: center; gap: 6px; cursor: pointer; }
+.sliders label.toggle input { width: auto; }
 input[type=range] { width: 100%; accent-color: var(--accent2); }
 .btn {
   background: var(--panel); color: var(--ink); border: 1px solid #3a424d;

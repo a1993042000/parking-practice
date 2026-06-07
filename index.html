@@ -37,6 +37,10 @@
       <label>車寬 <span id="widVal">1.9</span> m
         <input type="range" id="carWid" min="1.5" max="2.2" step="0.1" value="1.9" />
       </label>
+      <label>軸距 <span id="wbVal">2.70</span> m
+        <input type="range" id="carWb" min="1.8" max="3.4" step="0.05" value="2.70" />
+      </label>
+      <label class="toggle"><input type="checkbox" id="showTracks" checked /> 顯示輪胎軌跡（看內輪差）</label>
       <button id="resetBtn" class="btn">重置 (R)</button>
     </div>
 
@@ -52,7 +56,7 @@
     </div>
   </div>
 
-  <p id="hint">鍵盤：方向鍵 / WASD 駕駛，空白鍵煞車，R 重置。把車「完整開進」綠色車位並對正即過關。</p>
+  <p id="hint">鍵盤：方向鍵 / WASD 駕駛，空白鍵煞車，R 重置。只有<b>前輪</b>會轉向、後輪固定，轉彎時後輪會內切（內輪差）——橘色是後輪軌跡、藍色是前輪，注意兩者的差距。把車「完整開進」綠色車位並對正即過關。</p>
   <p id="desc"></p>
 </div>
 <script src="game.js"></script>
