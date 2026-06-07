@@ -30,20 +30,6 @@
   </div>
 
   <div id="controls">
-    <div class="sliders">
-      <label>車長 <span id="lenVal">4.6</span> m
-        <input type="range" id="carLen" min="3.4" max="6.0" step="0.1" value="4.6" />
-      </label>
-      <label>車寬 <span id="widVal">1.9</span> m
-        <input type="range" id="carWid" min="1.5" max="2.2" step="0.1" value="1.9" />
-      </label>
-      <label>軸距 <span id="wbVal">2.70</span> m
-        <input type="range" id="carWb" min="1.8" max="3.4" step="0.05" value="2.70" />
-      </label>
-      <label class="toggle"><input type="checkbox" id="showTracks" checked /> 顯示輪胎軌跡（看內輪差）</label>
-      <button id="resetBtn" class="btn">重置 (R)</button>
-    </div>
-
     <div id="wheelWrap">
       <svg id="wheel" viewBox="-100 -100 200 200" aria-label="方向盤">
         <g id="wheelRot">
@@ -76,7 +62,23 @@
     </div>
   </div>
 
-  <p id="hint">操作：<b>左／右</b>方向鍵轉動下方方向盤（放開後會<b>保持角度、不自動回正</b>，按「↺ 回正」可歸零）；<b>上／下</b>方向鍵前進／後退，<b>鬆開立刻停車</b>（不會滑行）。R 重置。只有<b>前輪</b>會轉向、後輪固定，轉彎時後輪會內切（內輪差）——橘色是後輪軌跡、藍色是前輪。把車「完整開進」綠色車位並對正即過關。</p>
+  <div id="tuning">
+    <div class="sliders">
+      <label>車長 <span id="lenVal">4.6</span> m
+        <input type="range" id="carLen" min="3.4" max="6.0" step="0.1" value="4.6" />
+      </label>
+      <label>車寬 <span id="widVal">1.9</span> m
+        <input type="range" id="carWid" min="1.5" max="2.2" step="0.1" value="1.9" />
+      </label>
+      <label>軸距 <span id="wbVal">2.70</span> m
+        <input type="range" id="carWb" min="1.8" max="3.4" step="0.05" value="2.70" />
+      </label>
+      <label class="toggle"><input type="checkbox" id="showTracks" checked /> 顯示輪胎軌跡（看內輪差）</label>
+      <button id="resetBtn" class="btn">重置 (R)</button>
+    </div>
+  </div>
+
+  <p id="hint">操作：<b>左／右</b>方向鍵轉方向盤（放開後<b>保持角度、不自動回正</b>）；<b>空白鍵</b>或「↺ 回正」鈕可讓方向盤<b>回正</b>；<b>上／下</b>方向鍵前進／後退，<b>鬆開立刻停車</b>（不滑行）。R 重置。只有<b>前輪</b>會轉向、後輪固定，轉彎時後輪會內切（內輪差）——橘色是後輪軌跡、藍色是前輪。把車「完整開進」綠色車位並對正即過關。</p>
   <p id="desc"></p>
 </div>
 <script src="game.js"></script>

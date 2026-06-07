@@ -13,15 +13,9 @@
   const view = { scale: 1 };
 
   function resize() {
-    const stage = document.getElementById("stage");
-    const availW = stage.clientWidth;
-    const availH = stage.clientHeight || Math.round(window.innerHeight * 0.5);
-    // 等比縮放，讓整個棋盤「contain」進可用區域，高度不再過長
-    let cssW = availW;
-    let cssH = cssW * WORLD.h / WORLD.w;
-    if (cssH > availH) { cssH = availH; cssW = cssH * WORLD.w / WORLD.h; }
-    canvas.style.width = Math.floor(cssW) + "px";
-    canvas.style.height = Math.floor(cssH) + "px";
+    const cssW = canvas.clientWidth;          // 用滿可用寬度，不縮小寬度
+    const cssH = Math.round(cssW * WORLD.h / WORLD.w);
+    canvas.style.height = cssH + "px";
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
     canvas.width = Math.round(cssW * dpr);
     canvas.height = Math.round(cssH * dpr);
@@ -231,9 +225,9 @@
     if (input.left && !input.right) car.steer = Math.max(-MAX_STEER, car.steer - STEER_RATE*dt);
     else if (input.right && !input.left) car.steer = Math.min(MAX_STEER, car.steer + STEER_RATE*dt);
 
-    // 油門：有壓上/下鍵車才前進/後退；放開（或踩煞車）立刻停止，不滑行
-    if (input.up && !input.down && !input.brake) car.v += ACCEL*dt;
-    else if (input.down && !input.up && !input.brake) car.v -= ACCEL*dt;
+    // 油門：有壓上/下鍵車才前進/後退；放開立刻停止，不滑行
+    if (input.up && !input.down) car.v += ACCEL*dt;
+    else if (input.down && !input.up) car.v -= ACCEL*dt;
     else car.v = 0;
     car.v = Math.max(-MAX_REV, Math.min(MAX_FWD, car.v));
 
@@ -362,9 +356,10 @@
 
   // ---- input ----
   const keymap = { ArrowUp:"up",KeyW:"up",ArrowDown:"down",KeyS:"down",
-                   ArrowLeft:"left",KeyA:"left",ArrowRight:"right",KeyD:"right",Space:"brake" };
+                   ArrowLeft:"left",KeyA:"left",ArrowRight:"right",KeyD:"right" };
   window.addEventListener("keydown", (e) => {
     if (e.code === "KeyR") { loadLevel(state.li); return; }
+    if (e.code === "Space") { car.steer = 0; e.preventDefault(); return; }  // 空白鍵回正方向盤
     const k = keymap[e.code]; if (k) { input[k] = true; e.preventDefault(); }
   });
   window.addEventListener("keyup", (e) => { const k = keymap[e.code]; if (k){ input[k]=false; e.preventDefault(); } });
