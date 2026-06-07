@@ -6,7 +6,7 @@
 (() => {
   "use strict";
 
-  const WORLD = { w: 1000, h: 680 };
+  const WORLD = { w: 1280, h: 560 };   // 寬扁比例（~2.3:1），高度不再過長
   const SCALE = 13;            // world units (px) per metre
   const canvas = document.getElementById("game");
   const ctx = canvas.getContext("2d");
@@ -60,49 +60,62 @@
   const D = Math.PI / 180;
   function buildLevels() {
     const W = WORLD.w, H = WORLD.h, border = 14;
+    const SX = W / 2;            // 車位永遠水平置中，靠下擺放
     const L = [];
+
+    // 1. 暖身：直接開進
     L.push({ name: "暖身：開進車位", diff: 1,
-      desc: "開放停車場。把車往上開進綠色車位並對正。",
-      start: { x: 500, y: 560, a: -90*D },
-      spot:  { x: 500, y: 150, a: -90*D, len: 80, wid: 42 },
+      desc: "把車往下開進中間靠下的綠色車位並對正。",
+      start: { x: SX, y: 110, a: 90*D },
+      spot:  { x: SX, y: 410, a: 90*D, len: 80, wid: 44 },
       walls: [], cars: [] });
+
+    // 2. 垂直停車（夾縫）
     L.push({ name: "垂直停車（夾縫）", diff: 2,
-      desc: "兩車中間的垂直車位。前進或倒車入位皆可，注意左右車輛與內輪差。",
-      start: { x: 500, y: 520, a: -90*D },
-      spot:  { x: 500, y: 150, a: -90*D, len: 80, wid: 44 },
-      walls: [ { x: 80, y: 96, w: W-160, h: 8 } ],
-      cars: [ { x: 444, y: 150, a: -90*D, len: 74, wid: 26 },
-              { x: 556, y: 150, a: -90*D, len: 74, wid: 26 } ] });
+      desc: "從上方開下來，停進兩車中間的垂直車位，注意左右車輛與內輪差。",
+      start: { x: SX, y: 110, a: 90*D },
+      spot:  { x: SX, y: 410, a: 90*D, len: 80, wid: 46 },
+      walls: [ { x: 220, y: 470, w: W-440, h: 12 } ],
+      cars: [ { x: SX-112, y: 410, a: 90*D, len: 78, wid: 26 },
+              { x: SX+112, y: 410, a: 90*D, len: 78, wid: 26 } ] });
+
+    // 3. 路邊平行停車
     L.push({ name: "路邊平行停車", diff: 3,
-      desc: "沿著下方路緣，倒車進入兩車之間的平行車位。倒車打方向時注意後輪內切。",
-      start: { x: 300, y: 470, a: 0 },
-      spot:  { x: 500, y: 566, a: 0, len: 98, wid: 40 },
-      walls: [ { x: 80, y: 600, w: W-160, h: 40 } ],
-      cars: [ { x: 392, y: 566, a: 0, len: 70, wid: 28 },
-              { x: 612, y: 566, a: 0, len: 70, wid: 28 } ] });
+      desc: "沿著行車道往右開，倒車進入中間靠下、兩車之間的平行車位。",
+      start: { x: 280, y: 360, a: 0 },
+      spot:  { x: SX, y: 432, a: 0, len: 100, wid: 40 },
+      walls: [ { x: 80, y: 474, w: W-160, h: 40 } ],
+      cars: [ { x: SX-118, y: 432, a: 0, len: 74, wid: 28 },
+              { x: SX+118, y: 432, a: 0, len: 74, wid: 28 } ] });
+
+    // 4. 窄車庫倒車
     L.push({ name: "窄車庫倒車", diff: 3,
-      desc: "倒車進入上方的窄車庫，三面是牆、開口很窄。",
-      start: { x: 500, y: 520, a: -90*D },
-      spot:  { x: 500, y: 152, a: -90*D, len: 78, wid: 42 },
-      walls: [ { x: 450, y: 96, w: 10, h: 132 },
-               { x: 540, y: 96, w: 10, h: 132 },
-               { x: 450, y: 96, w: 100, h: 10 } ],
+      desc: "倒車進入中間靠下的窄車庫，三面是牆、開口朝上。",
+      start: { x: SX, y: 150, a: -90*D },
+      spot:  { x: SX, y: 412, a: 90*D, len: 76, wid: 44 },
+      walls: [ { x: SX-44, y: 352, w: 10, h: 140 },
+               { x: SX+34, y: 352, w: 10, h: 140 },
+               { x: SX-44, y: 482, w: 88, h: 10 } ],
       cars: [] });
+
+    // 5. S 型窄巷
     L.push({ name: "S 型窄巷", diff: 4,
-      desc: "由下往上穿過 S 型窄巷（右-左-右），最後停進巷底車位。慢慢轉別刮牆。",
-      start: { x: 500, y: 610, a: -90*D },
-      spot:  { x: 500, y: 120, a: -90*D, len: 82, wid: 44 },
-      walls: [ { x: 14, y: 500, w: 520, h: 16 }, { x: 720, y: 500, w: 266, h: 16 },
-               { x: 14, y: 340, w: 120, h: 16 }, { x: 280, y: 340, w: 706, h: 16 },
-               { x: 14, y: 180, w: 520, h: 16 }, { x: 720, y: 180, w: 266, h: 16 } ],
+      desc: "由上往下穿過 S 型窄巷（先右、再左），最後停進中間靠下的車位。",
+      start: { x: 940, y: 70, a: 90*D },
+      spot:  { x: SX, y: 442, a: 90*D, len: 84, wid: 46 },
+      walls: [ { x: 14, y: 176, w: 780, h: 16 },
+               { x: 500, y: 300, w: W-514, h: 16 } ],
       cars: [] });
+
+    // 6. 緊密平行停車
     L.push({ name: "緊密平行停車", diff: 5,
-      desc: "高難度：兩車之間只有一點點空間，必須善用後輪內輪差才停得進去。",
-      start: { x: 300, y: 470, a: 0 },
-      spot:  { x: 500, y: 566, a: 0, len: 82, wid: 36 },
-      walls: [ { x: 80, y: 600, w: W-160, h: 40 } ],
-      cars: [ { x: 402, y: 566, a: 0, len: 72, wid: 28 },
-              { x: 598, y: 566, a: 0, len: 72, wid: 28 } ] });
+      desc: "高難度：兩車之間只有一點點空間，善用後輪內輪差才停得進去。",
+      start: { x: 280, y: 360, a: 0 },
+      spot:  { x: SX, y: 434, a: 0, len: 86, wid: 36 },
+      walls: [ { x: 80, y: 476, w: W-160, h: 40 } ],
+      cars: [ { x: SX-86, y: 434, a: 0, len: 72, wid: 28 },
+              { x: SX+86, y: 434, a: 0, len: 72, wid: 28 } ] });
+
     for (const lv of L) {
       lv.walls = lv.walls.concat([
         { x: 0, y: 0, w: W, h: border }, { x: 0, y: H-border, w: W, h: border },
